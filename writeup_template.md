@@ -156,5 +156,7 @@ What could be improved? lots of them.
 2. if a new car identified, its speed and direction could be projected using calculation and which in turn can help define the search area.
 3. in real usage, all the different search can be run in parallel or maybe accelarated in parallel
 4. each lane could draw 3D pipe in which each car is supposed to drive through it. this could help detect the search area far and near.
+5. find optimal overlap to reduce the number of search windows if it is acceptable for some frame not having car detected.
+6. or adding average window positioin when car is detect to smooth out the frame which does not have frame if choose to have less overlap.
 
 
