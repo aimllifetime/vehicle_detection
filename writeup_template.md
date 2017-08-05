@@ -20,9 +20,6 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
 ---
 ### Writeup
 
@@ -49,9 +46,23 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I tried various combinations of parameters and different color space. 
 
-#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. how a classifier is trained using selected features.
 
-I trained a linear SVM using...
+Following features are used for classifier feature extraction:
+* the HOG feature with the parameter: orient = 9, pix_per_cell = 8, cell_per_block = 2.
+* "ALL" three channel hog features are concatinated
+* color histogram is used with 32 bins
+* spatial feature is used with 32 bin for color distribution.
+
+Each image extracts above feature to form a single feature vector.
+
+For the car and non-car image, extract feature vector for each image.
+then use the standardScaler to normalize the feature before do the classifier training.
+The data is plit into 80% trainig and 20% validation. 
+
+The classifier uses linear classifier.
+
+The accuracy is 0.9882
 
 ### Sliding Window Search
 
@@ -73,15 +84,24 @@ The image is read in as RGB and scaled between [0, 1] as the classifier used png
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+The pipeline works in following flow for each every frame:
+
+
+Initially used RGB color space and only one channel for HOG feature. The classifier accuracy is around 0.9 something. Later found out adding more channel for HOG increase the accuracy. After that, I add all the feature which came from class, such as color histgram and spatial bins. The YCrCb later is found to be better detecting the white car. 
+
+the searching window scale ideally uses four different scale such as small(64, 64), two medium scales (90, 90) and (130, 130) and finally the largest scale (150, 150)
+
+The search area is purposely placed in the lower and right corner, x starting from 700 and y start from 380.
+in this area, different search window area is focused.
+
+Ultimately I searched on few different scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
 ![alt text][image4]
 ---
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+#### 1. Here's a [link to my video result](./project_video.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
