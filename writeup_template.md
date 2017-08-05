@@ -44,7 +44,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 #### 2. Explain how the final choice of HOG parameters comes.
 
-I tried various combinations of parameters and different color space. 
+I tried various combinations of parameters of orient, pix_per_cell and cell_per_block and came to choose the one that is being used in quiz. Majority of question or other in forum seems uses closer one to this. some changed to orient = 11 and make it work. So I just stay with the typical one.
 
 #### 3. how a classifier is trained using selected features.
 
