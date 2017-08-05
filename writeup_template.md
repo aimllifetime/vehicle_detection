@@ -49,19 +49,29 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I tried various combinations of parameters and different color space. 
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using...
 
 ### Sliding Window Search
 
-#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. This is most tricky part and it took lots of time experiment to video to make sure every frame is detected car if it exists. The function is in **_find_car_in_image_**
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+* this function mainly define where to search the window for cars. 
+* mostly focus on the right side of car for the computation purpose since the video has no
+* car on left. it certainly can covers from x_start_stop =[None, None]
+* the strategy used here is for the view far from driver, use small xy_window size, such as:
+* (64, 64), (90, 90) and smaller overlap such as 0.7 or 0.8
+* for the view are close to driver car, use large window size such as (90, 90), (130,130) and (150, 150)
+* the overlap uses bigger overlap so that car can be detect mutiple times. The heat threshold > 1 will not mask off the big car.
+* more area is in between x_start_stop[700, 1050] for car is small.
+* x_start_stop[1000, None] for closer car appears bigger on with larger overlap such as 0.8 and 0.9
+
+The image is read in as RGB and scaled between [0, 1] as the classifier used png image.
 
 ![alt text][image3]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
