@@ -81,10 +81,12 @@ The accuracy is 0.9882
 The image is read in as RGB and scaled between [0, 1] as the classifier used png image.
 
 following shows the image area:
+
 ![alt text](./examples/slide_window.png)
 
 The searched areas are:
 
+![alt text](./examples/slide_windows.png)
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
@@ -118,15 +120,15 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here are five frames and their corresponding heatmaps:
 
-![alt text][image5]
+![alt text](./examples/heatmap.png)
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![alt text](./examples/labels_bound_box.png)
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+![alt text](./examples/last_frame.jpg)
 
 
 
