@@ -80,7 +80,11 @@ The accuracy is 0.9882
 
 The image is read in as RGB and scaled between [0, 1] as the classifier used png image.
 
-![alt text][image3]
+following shows the image area:
+![alt text](./examples/slide_window.png)
+
+The searched areas are:
+
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
